@@ -1,0 +1,9 @@
+MEMORY
+{
+	ASSERT_EMPTY(rwx)  : ORIGIN = 0x00000000, LENGTH = 0
+
+	IOVECTORS(rx)      : ORIGIN = 0x08000100, LENGTH = 0x00000010
+	PRG_RAM(rwx)       : ORIGIN = 0x08004000, LENGTH = 0x0007c000 /* Intram */
+}
+
+INCLUDE src/netx.ld
