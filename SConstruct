@@ -75,14 +75,14 @@ src/alive_blinking.c
 #
 
 # The list of include folders. Here it is used for all files.
-astrIncludePaths = ['src', '#platform/src', '#platform/src/lib', '/tmp/targets/version', 'flasher/includes']
+astrIncludePaths = ['src', '#platform/src', '#platform/src/lib', '/tmp/targets/version', 'flasher_lib/includes']
 
 
 atBuildConfigurations = {
     'netX56_standalone_flasher_intram': {
         'ENV': atEnv.NETX56,
         'LD': 'src/netx56/netx56_intram.ld',
-        'FLASHER_LIB': 'flasher/netx56_nodbg/lib/libflasher_netx56.a',
+        'FLASHER_LIB': 'flasher_lib/libflasher_netx56.a',
         'SRC': src_standalone,
         'DEFINES': [['CFG_DEBUGMSG', '0']],
         'BOOTIMAGES': {
@@ -93,7 +93,7 @@ atBuildConfigurations = {
     'netX56_standalone_flasher_intram_dbg': {
         'ENV': atEnv.NETX56,
         'LD': 'src/netx56/netx56_intram.ld',
-        'FLASHER_LIB': 'flasher/netx56_dbg/lib/libflasher_netx56_debug.a',
+        'FLASHER_LIB': 'flasher_lib/libflasher_netx56_debug.a',
         'SRC': src_standalone,
         'DEFINES': [['CFG_DEBUGMSG', '1']],
         'BOOTIMAGES': {
@@ -105,7 +105,7 @@ atBuildConfigurations = {
     'netX56_standalone_flasher_sdram': {
         'ENV': atEnv.NETX56,
         'LD': 'src/netx56/netx56_sdram.ld',
-        'FLASHER_LIB': 'flasher/netx56_nodbg/lib/libflasher_netx56.a',
+        'FLASHER_LIB': 'flasher_lib/libflasher_netx56.a',
         'SRC': src_standalone,
         'DEFINES': [['CFG_DEBUGMSG', '0']],
         'BOOTIMAGES': {
@@ -116,7 +116,7 @@ atBuildConfigurations = {
     'netX56_standalone_flasher_sdram_dbg': {
         'ENV': atEnv.NETX56,
         'LD': 'src/netx56/netx56_sdram.ld',
-        'FLASHER_LIB': 'flasher/netx56_dbg/lib/libflasher_netx56_debug.a',
+        'FLASHER_LIB': 'flasher_lib/libflasher_netx56_debug.a',
         'SRC': src_standalone,
         'DEFINES': [['CFG_DEBUGMSG', '1']],
         'BOOTIMAGES': {
