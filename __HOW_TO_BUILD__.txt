@@ -4,58 +4,34 @@ by the netx as a boot image and contains the data to be flashed.
 The standalone flasher is just the bare flasher program. In order to use it,
 you attach the data to be flashed at the end and adjust the boot header.
 
-
 How to build
 ------------
 
-At the moment the build process is a bit complicated. The standalone flasher 
-uses a library build of the flasher. 
-At the moment, the flasher must be built by hand and some of the files must 
-be copied to the standalone flasher. 
+0) Install python 2.7
 
+1) Build the flasher including the library version
 
-1) build the flasher including the library version
-
-  git clone https://github.com/muhkuh-sys/org.muhkuh.tools-flasher.git
+  git clone --recurse-submodules https://github.com/muhkuh-sys/org.muhkuh.tools-flasher.git
   cd org.muhkuh.tools-flasher
-  git checkout f58eec7cd70d07d938331cfadc627e493740e4fc
-  git submodule init
-  git submodule update
-  python2.7 mbs/mbs
-  cd ..
-
-2) build the standalone flasher 
-  Checkout this project, copy the flasher files and build it.
-  git clone https://github.com/muhkuh-sys/org.muhkuh.tools-flasher_standalone.git
+  python mbs/mbs
   
-  Copy includes:
-  mkdir -p org.muhkuh.tools-flasher_standalone/flasher/includes
-  cp 
-    org.muhkuh.tools-flasher/src/spi.h 
-    org.muhkuh.tools-flasher/src/flasher_spi.h 
-    org.muhkuh.tools-flasher/src/netx_consoleapp.h 
-    org.muhkuh.tools-flasher/src/sha1_arm/sha1.h 
-    org.muhkuh.tools-flasher/src/spi_flash.h 
-    org.muhkuh.tools-flasher/targets/version/flasher_version.h 
-    org.muhkuh.tools-flasher/targets/netx50_nodbg/spi_flash_types/spi_flash_types.h 
-    org.muhkuh.tools-flasher_standalone/flasher/includes
-  
-  Copy the lib files:
-  mkdir -p org.muhkuh.tools-flasher_standalone/flasher/netx50_nodbg/lib
-  cp 
-    org.muhkuh.tools-flasher/targets/netx50_nodbg/libflasher_netx50.a 
-    org.muhkuh.tools-flasher_standalone/flasher/netx50_nodbg/lib/
-  Repeat for the other chip types.
+  This creates the directory 'targets/flasher_lib' containing library versions 
+  of the flasher and some includes.
 
-  Build the project:  
+2) Build the standalone flasher 
+  
+  git clone --recurse-submodules  https://github.com/muhkuh-sys/org.muhkuh.tools-flasher_standalone.git
+  
+  copy the directory 
+  'org.muhkuh.tools-flasher/targets/flasher_lib' to 
+  'org.muhkuh.tools-flasher_standalone/flasher_lib'
+  
   cd org.muhkuh.tools-flasher_standalone
-  git submodule init
-  git submodule update
-  python2.7 mbs/mbs
+  python mbs/mbs
 
-3) build a boot image with data to flashed
+3) Build a boot image with data to flashed
   This is done using the python script 'append.py' in the bootimage directory.
-  
   The bootimage directory contains an example that flashes a blinki program.
+  
   cd bootimage
   build_bootimages.bat 
