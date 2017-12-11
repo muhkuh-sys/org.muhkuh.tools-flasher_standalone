@@ -35,3 +35,41 @@ How to build
   
   cd bootimage
   build_bootimages.bat 
+
+  This will create four versions of a boot image for the netX 51/52, running 
+  either in internal RAM or SDRAM, and a version of each with additional output.
+
+
+Last tested versions:
+flasher version a49fa3cf2bb86f35373a96a572a750c68c790320
+standalone flasher version 3e713ce7623ecf7a8e27593b7f965ebdfffd4437
+
+
+Booting a netX via Ethernet
+---------------------------
+
+The netX 51/52, 90 and 4000 can load a boot image from a TFTP server.
+This works only for images that load to internal RAM. 
+The images that load to SDRAM cannot be booted this way, but they will
+run from a memory card.
+
+
+In order to boot the netX 51/52 via Ethernet, the following requirements must be met:
+- a DHCP/BOOTP server
+- a TFTP server
+- No boot image must be in the flash.
+
+In this example, we are using TftpD32 from http://tftpd32.jounin.net .
+We set up the servers to run on a dedicated ethernet interface to which the netX 51/52 is connected.
+
+Configuration of the Ethernet interface:
+Assign a fixed IP V4 address, e.g. 192.168.210.200, subnet mask 255.255.255.0
+
+Configuration of the DHCP/BOOTP service:
+- The IP address/netmask of the ethernet interface
+- A pool of IP addresses to distribute via DHCP, e.g. 10 addressses starting from 192.168.210.210.
+- The name of the boot image that the netx shall load.
+
+Configuration of the TFTP service:
+- The directory containing the file to be booted by the netX.
+
